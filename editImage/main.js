@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded",function(){
     const content = document.getElementById('input__content')
     const color = document.getElementById('input__color')
     const blur = document.getElementById('input__blur')
+    const img = document.getElementById('input__img')
+    
     // const border = document.getElementById('input__border')
     
     
@@ -29,7 +31,10 @@ document.addEventListener("DOMContentLoaded",function(){
     // border.onchange = () =>{
     //     myFunction('border');
     // }
-    function myFunction(type) {
+    img.onchange = function (){
+        myFunction('img',this);
+    }
+    function myFunction(type,input = null) {
         switch(type) {
             case 'width':
                 document.querySelector(".box__content").style.width  = `${width.value}px`;
@@ -39,6 +44,16 @@ document.addEventListener("DOMContentLoaded",function(){
                 break;
             case 'link':
                 document.querySelector(".box__content img").src = link.value;
+                break;
+            case 'img':
+                console.log('input.files',input.files);
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelector(".box__content img").src = e.target.result;
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
                 break;
             case 'content':
                 document.querySelector(".content__text").innerHTML  = content.value;
