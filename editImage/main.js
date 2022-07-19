@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded",function(){
     const content = document.getElementById('input__content')
     const color = document.getElementById('input__color')
     const blur = document.getElementById('input__blur')
+    const brightness = document.getElementById('input__brightness')
     const img = document.getElementById('input__img')
     
     // const border = document.getElementById('input__border')
@@ -27,6 +28,10 @@ document.addEventListener("DOMContentLoaded",function(){
     }
     blur.onchange = () =>{
         myFunction('blur');
+    }
+    brightness.onchange = () =>{
+        console.log('aaâ');
+        myFunction('brightness');
     }
     // border.onchange = () =>{
     //     myFunction('border');
@@ -65,8 +70,18 @@ document.addEventListener("DOMContentLoaded",function(){
                 document.querySelector(".content__text").style.border = `4px solid ${border.value};`;
                 break;
             case 'blur':
-                console.log(`blur(${blur.value}px !important)`);
-                document.querySelector(".box__content img").style.filter = `blur(${blur.value}px)`;
+                if(brightness.value){
+                    document.querySelector(".box__content img").style.filter = `blur(${blur.value}px) brightness(${brightness.value})`;
+                }else{
+                    document.querySelector(".box__content img").style.filter = `blur(${blur.value}px)`;
+                }
+                break;
+            case 'brightness':
+                if(blur.value){
+                    document.querySelector(".box__content img").style.filter = `blur(${blur.value}px) brightness(${brightness.value})`;
+                }else{
+                    document.querySelector(".box__content img").style.filter = `brightness(${brightness.value})`;
+                }
                 break;
         }
         
